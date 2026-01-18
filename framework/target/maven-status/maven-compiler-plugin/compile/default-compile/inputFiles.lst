@@ -1,0 +1,13 @@
+/Users/skpatro/mine/MyProjects 2/Selenium/SeleniumJavaFramework_SKP/framework/src/main/java/base/driver/DriverFactory.java
+/Users/skpatro/mine/MyProjects 2/Selenium/SeleniumJavaFramework_SKP/framework/src/main/java/base/driver/PageDriver.java
+/Users/skpatro/mine/MyProjects 2/Selenium/SeleniumJavaFramework_SKP/framework/src/main/java/base/pages/BasePage.java
+/Users/skpatro/mine/MyProjects 2/Selenium/SeleniumJavaFramework_SKP/framework/src/main/java/base/testUtils/BaseTest.java
+/Users/skpatro/mine/MyProjects 2/Selenium/SeleniumJavaFramework_SKP/framework/src/main/java/base/utils/AnnotationTransformer.java
+/Users/skpatro/mine/MyProjects 2/Selenium/SeleniumJavaFramework_SKP/framework/src/main/java/base/utils/App.java
+/Users/skpatro/mine/MyProjects 2/Selenium/SeleniumJavaFramework_SKP/framework/src/main/java/base/utils/ExcelReader.java
+/Users/skpatro/mine/MyProjects 2/Selenium/SeleniumJavaFramework_SKP/framework/src/main/java/base/utils/ExtentManager.java
+/Users/skpatro/mine/MyProjects 2/Selenium/SeleniumJavaFramework_SKP/framework/src/main/java/base/utils/ExtentReport.java
+/Users/skpatro/mine/MyProjects 2/Selenium/SeleniumJavaFramework_SKP/framework/src/main/java/base/utils/JsonReader.java
+/Users/skpatro/mine/MyProjects 2/Selenium/SeleniumJavaFramework_SKP/framework/src/main/java/base/utils/RetryAnalyzer.java
+/Users/skpatro/mine/MyProjects 2/Selenium/SeleniumJavaFramework_SKP/framework/src/main/java/base/utils/Util.java
+/Users/skpatro/mine/MyProjects 2/Selenium/SeleniumJavaFramework_SKP/framework/src/main/java/module-info.java
