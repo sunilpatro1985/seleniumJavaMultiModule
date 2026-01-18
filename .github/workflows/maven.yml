@@ -1,0 +1,68 @@
+name: Selenium Regression Suite
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+        inputs:
+          environment:
+            description: 'Environment to run tests against'
+            required: true
+            default: 'test'
+            type: choice
+            options:
+              - dev
+              - test
+              - prod
+          browser:
+            description: 'Browser for execution'
+            required: true
+            default: 'chrome'
+            type: choice
+            options:
+              - chrome
+              - firefox
+              - edge
+          test_suite:
+            description: 'TestNG Suite File (e.g., regression.xml)'
+            required: true
+            default: 'testng.xml'
+            type: string
+          headless:
+            description: 'Run in Headless Mode?'
+            required: true
+            default: true
+            type: boolean
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: maven
+
+      - name: Run Selenium Tests
+        run: |
+          mvn test \
+          -DsuiteXmlFile=${{inputs.test_suite }} \
+          -Denv=${{inputs.environment }} \
+          -Dbrowser=${{ inputs.browser }} \
+          -Dheadless=${{ inputs.headless }}
+
+      - name: Upload Test Report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: target/surefire-reports/
