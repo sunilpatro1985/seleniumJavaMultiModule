@@ -7,7 +7,6 @@ import pages.HomePage;
 import pages.ProductPage;
 
 public class CPTest extends BaseTest {
-
     @Test
     public static void CPTest1() throws InterruptedException {
         HomePage homePage = new HomePage();

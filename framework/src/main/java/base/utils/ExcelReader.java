@@ -75,23 +75,6 @@ public class ExcelReader {
         return getCellData(rownum, columns.get(columnName));
     }
 
-    public static void main(String[] args) throws Exception {
-        ExcelReader excel = new ExcelReader();
-        /*excel.setExcelFile("./testData.xlsx", "Sheet1");
-        System.out.println(excel.getCellData("fullname", 1));
-        System.out.println(excel.getCellData("email", 1));
-        System.out.println(excel.getCellData("telephone", 1));*/
-        //excel.getCellData(1,1);
-        excel.setExcelFile("./test_data.xlsx", "prodsort");
-        Object obj[][] = excel.to2DArray();
-
-        //excel.setExcelFile("./testData.xlsx", "Sheet1");
-        for(int i=0; i< obj.length;i++){
-            for(int j=0;j<obj[i].length;j++){
-                System.out.println(obj[i][j]);
-            }
-        }
-    }
 
     public int getNoOfRows(){
         return sh.getPhysicalNumberOfRows();

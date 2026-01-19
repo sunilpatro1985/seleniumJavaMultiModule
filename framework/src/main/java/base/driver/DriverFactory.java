@@ -22,6 +22,20 @@ public class DriverFactory {
 
         if(browser.contains("chrome")){
             ChromeOptions coptions = new ChromeOptions();
+            // Removes the "Chrome is being controlled by automated software" infobar
+            coptions.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+            // Prevents the browser from signaling it's a driver
+            coptions.addArguments("--disable-blink-features=AutomationControlled");
+            coptions.setExperimentalOption("useAutomationExtension", false);
+
+            // 4. Force a standard desktop resolution
+            coptions.addArguments("--window-size=1920,1080");
+
+
+            // 3. Set a real-world User-Agent
+            coptions.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) " +
+                    "AppleWebKit/537.36 (KHTML, like Gecko) " +
+                    "Chrome/120.0.0.0 Safari/537.36");
 
             //System.setProperty("webdriver.chrome.driver","/Users/skpatro/sel/chromedriver");
             //WebDriverManager.chromedriver().browserVersion("92");
@@ -81,8 +95,8 @@ public class DriverFactory {
     static ChromeOptions getChromeOptions(){
         ChromeOptions co = new ChromeOptions();
         co.addArguments("--headless=new"); //when on githubActions
-        co.addArguments("--disable-gpu");
-        co.addArguments("--no-sandbox");
+        //co.addArguments("--disable-gpu");
+        //co.addArguments("--no-sandbox");
         //co.setBinary("path of chrome app");
         //co.setBrowserVersion("116.0");
         //cap.setCapability(ChromeOptions.CAPABILITY, co);

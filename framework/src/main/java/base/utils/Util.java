@@ -6,8 +6,11 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 public class Util {
 
@@ -32,5 +35,23 @@ public class Util {
         byte[] file = FileUtils.readFileToByteArray(new File(screenshotPath));
         String base64Img = Base64.encodeBase64String(file);
         return  base64Img;
+    }
+
+    public static void writeUrlsToCsv(List<String> items, String filePath) {
+        try (
+                BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            // Optional: Write a Header
+            writer.write("Hyperlink");
+            writer.newLine();
+
+            // Write each URL to a new line
+            for (String item : items) {
+                writer.write(item);
+                writer.newLine();
+            }
+            System.out.println("CSV file successfully created at: " + filePath);
+        } catch (IOException e) {
+            System.err.println("Error writing to CSV: " + e.getMessage());
+        }
     }
 }

@@ -10,7 +10,14 @@
     </parent>
 
     <artifactId>dp2</artifactId>
-
+    <dependencies>
+        <dependency>
+            <groupId>org.skp</groupId>
+            <artifactId>framework</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
 
 
 </project>

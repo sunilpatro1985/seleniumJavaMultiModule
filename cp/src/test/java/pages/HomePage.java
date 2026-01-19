@@ -18,14 +18,17 @@ public class HomePage extends BasePage {
 
             public void navigateToMenPage() throws InterruptedException {
                 //click(captcha);
+                waitForPageLoad();
+                Thread.sleep(2000);
                 click(closeButton);
-                //click(ignoreBtn);
-
+                Thread.sleep(1000);
+                click(ignoreBtn);
+                Thread.sleep(2000);
                 click(menu_Shop);
                 ArrayList<String> tabs = new ArrayList<String>(PageDriver.getCurrentDriver().getWindowHandles());
                 PageDriver.getCurrentDriver().switchTo().window(tabs.get(1)); // Switch to the new tab
 
-                Thread.sleep(4000);
+                Thread.sleep(2000);
 
             }
 

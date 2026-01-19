@@ -2,13 +2,16 @@ package base.pages;
 
 import base.driver.PageDriver;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class BasePage {
 
@@ -50,6 +53,32 @@ public class BasePage {
     }
     public void waitForEls(By byLocator){
         getWait().until(ExpectedConditions.presenceOfAllElementsLocatedBy(byLocator));
+    }
+
+    public void waitForPageLoad() {
+
+        getWait().until(webDriver -> ((JavascriptExecutor) webDriver)
+                .executeScript("return document.readyState").equals("complete"));
+    }
+
+    public void scrollToElement(By locator) {
+        JavascriptExecutor js = (JavascriptExecutor) PageDriver.getCurrentDriver();
+
+        WebElement element = PageDriver.getCurrentDriver().findElement(locator);
+        // true: aligns top of element to top of viewport
+        // false: aligns bottom of element to bottom of viewport
+        //js.executeScript("arguments[0].scrollIntoView(false);", element);
+
+        new Actions(PageDriver.getCurrentDriver())
+                .scrollToElement(element)
+                .perform();
+    }
+
+    public static List<String> getListItemsWithAttribute(List<WebElement> items, String attribute) {
+        //List<WebElement> items = PageDriver.getCurrentDriver().findElements(locator);
+        return items.stream()
+                .map(e -> e.getAttribute(attribute))
+                .collect(Collectors.toList());
     }
 
 

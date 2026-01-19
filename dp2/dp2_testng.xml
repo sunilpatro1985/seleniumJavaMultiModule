@@ -1,9 +1,10 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
 <suite name="MySuite" parallel="classes">
+
     <test name="Regression1" preserve-order="true">
         <parameter name="module" value="dp2"/>
         <classes>
-            <class name="testCases.CPTest"/>
+            <class name="testCases.DP2Test"/>
         </classes>
     </test>
 
