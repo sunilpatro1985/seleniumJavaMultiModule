@@ -45,15 +45,25 @@ Maven installed
   
 Build the Project  
 Since this is a multi-module project, install the core framework module first or build from the root:
-  
+```  
 mvn clean install -DskipTests
+```
   
 Bash
 ### Run all tests in Chrome (Default)
+```
 mvn test
-  
+```
+
 ### Run tests in Firefox
+```
 mvn test -Dbrowser=firefox
+```
+
+### You can run a specific module by using the flag -pl (project list), 
+```
+mvn test -pl cp
+```
   
 ### 📊 Reporting & Logs
 Screenshots: Automatically captured on failure and stored in the /screenshot folder.
