@@ -1,46 +1,70 @@
-## Selenium Java framework with maven testNG
+### Selenium Java Multi-Module Framework  
+This repository demonstrates a robust, scalable Multi-Module Maven Architecture for automated UI testing. It separates core framework utilities from specific test implementations, allowing multiple consumer projects to share the same underlying logic.
+
+### 🚀 Tech Stack  
+Language: Java
+Automation Tool: Selenium WebDriver
+Test Runner: TestNG
+Build Tool: Maven (Multi-Module)
+Design Pattern: Page Object Model (POM) & Singleton Pattern
+Reporting: Extent Reports / TestNG Reports  
+  
+### 🏗 Project Architecture  
+The project is divided into a parent-child module structure to promote reusability and clean separation of concerns:
+
+### 1. `framework` (Core Module)
+This is the **Common Utils** engine. It contains the base logic that all consumer modules inherit:
+* **Driver Management:** Singleton implementation for thread-safe WebDriver instantiation.
+* **Base Page:** Common Selenium wrappers (explicit waits, fluent actions, element handling).
+* **Utilities:** Excel readers (Apache POI), JSON parsers, and screenshot capture logic.
+
+### 2. Consumer Modules
+These modules depend on the `framework` module to execute specific business logic:
+* **`cp` :** Specific test suites and page objects for the CP application.
+* **`dp1`:** Independent test module for the DP1 platform.
+* **`dp2`:** Independent test module for the DP2 platform.
 
 
-Refer [step by step tutorial](https://www.youtube.com/playlist?list=PLPO0LFyCaSo1lEiEFxT97x-CSn-J1omzZ )
- for detailed explanation.
- 
+### 📂 Folder Structure
+```text
+.
+├── framework/           # Core utilities and base classes
+├── cp/                  # Consumer Module (Tests for CP)
+├── dp1/                 # Consumer Module (Tests for DP1)
+├── dp2/                 # Consumer Module (Tests for DP2)
+├── pom.xml              # Parent POM (Aggregator & Dependency management)
+├── testng.xml           # Main execution suite
+└── test_data.xlsx       # External data source
+└── urls.json            # JSON file for each module URLs
+```
 
-### Highlights on this framework 
-* How to create maven build project 
-* Write tests using testNG
-* Implement page object model
-* Singleton pattern for driver instantiation and getter / setter
-* Running the tests using maven surefire plugin
-* Run tests in command prompt
-* Run tests in Docker containers
+### 🔧 Installation & Setup
+Prerequisites
+JDK 11 or higher
+Maven installed
+  
+Build the Project  
+Since this is a multi-module project, install the core framework module first or build from the root:
+  
+mvn clean install -DskipTests
+  
+Bash
+### Run all tests in Chrome (Default)
+mvn test
+  
+### Run tests in Firefox
+mvn test -Dbrowser=firefox
+  
+### 📊 Reporting & Logs
+Screenshots: Automatically captured on failure and stored in the /screenshot folder.
+Logs: Detailed execution logs are available in the /logs directory.
+Reports: Refresh the /reports folder after execution to view the HTML test results.
+  
+### 💡 Key Features
+Reusability: The framework module ensures code isn't duplicated across cp, dp1, and dp2.
 
+Scalability: Adding a new consumer module (e.g., dp3) takes minutes.
 
-Refer below links for basic understanding of selenium, Maven & testNG
-* [Selenium java topics](https://youtube.com/playlist?list=PLPO0LFyCaSo22dffCqWdwyxOxdA1KgtJ7)  
-* [TestNG features](https://youtube.com/playlist?list=PLPO0LFyCaSo3gshbTOWezIzAqiJSHc2H-)  
+Parallel Execution: Configured via testng.xml for faster feedback loops.
 
------------------
-Open command prompt, navigate to project directory & run below command
-
-### Run tests in local
-`mvn test` //default runs in chrome browser  
-`mvn test -Dbrowser=firefox` 
-
-### Run tests in remote / docker
-
-**Note -** 
-Make sure you have docker desktop installed
-Docker is currently running
-Navigate to docker directory `cd docker`  
-Run below command to run the docker conntainers
-`docker-compose -f docker-compose-hubNode.yml up -d`
-
-Now in another terminal, run any of below command to run the tests inside the container  
-`mvn test -Dplatform=remote` //default runs in chrome browser  
-`mvn test -Dbrowser=firefox -Dplatform=remote`
-
-See the tests running insider container  
-Navigate to browser and load this url `localhost:4444`
-
-After running the tests, stop the containers  
-`docker-compose -f docker-compose-hubNode.yml down`
+Data Driven: Built-in support for Excel and JSON data sources.
