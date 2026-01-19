@@ -15,16 +15,18 @@ The project is divided into a parent-child module structure to promote reusabili
 ### 1. `framework` (Core Module)
 This is the **Common Utils** engine. It contains the base logic that all consumer modules inherit:
 * **Driver Management:** Singleton implementation for thread-safe WebDriver instantiation.
-* **Base Page:** Common Selenium wrappers (explicit waits, fluent actions, element handling).
-* **Utilities:** Excel readers (Apache POI), JSON parsers, and screenshot capture logic.
+* **Base Page:** Common Selenium wrappers (explicit waits, element handling and actions).
+* **Utils:** Excel readers (Apache POI), JSON parsers, extent report manager and screenshot capture logic.
+* **Base Test** holds the testNG annotations to launch the browser url, set up the extent report and attach screenshot on failure etc.
 
 ### 2. Consumer Modules
 These modules depend on the `framework` module to execute specific business logic:
 * **`cp` :** Specific test suites and page objects for the CP application.
-* **`dp1`:** Independent test module for the DP1 platform.
-* **`dp2`:** Independent test module for the DP2 platform.
-
-
+* **`dp1`:** Specific test suites and page objects for the DP1 application.
+* **`dp2`:** Specific test suites and page objects for the DP2 application.
+  
+Note - Each child module will have it's own page object classes and test classes
+  
 ### 📂 Folder Structure
 ```text
 .
@@ -49,21 +51,18 @@ Since this is a multi-module project, install the core framework module first or
 mvn clean install -DskipTests
 ```
   
-Bash
-### Run all tests in Chrome (Default)
-```
-mvn test
-```
-
-### Run tests in Firefox
-```
-mvn test -Dbrowser=firefox
-```
-
 ### You can run a specific module by using the flag -pl (project list), 
 ```
-mvn test -pl cp
+mvn test -pl cp -Dmodule="cp" -Dbrowser="chrome"
 ```
+
+Another way to trigger the child module tests, is to create testng.xml specific to each child module with parameter tag
+```dp2_testng.xml
+<parameter name="module" value="dp2"/>
+```
+  
+**App.java**  takes the default values for each variable if no mvn command line parameter (-Dmodule=dp2 or -Dbrowser=chrome) are provided, this is required to launch specific module app urls
+**BaseTest.java** takes the parameter values either from **testng.xml** **parameter** section or **App.java**
   
 ### 📊 Reporting & Logs
 Screenshots: Automatically captured on failure and stored in the /screenshot folder.
